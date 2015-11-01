@@ -2,6 +2,7 @@ package yan.com.taobaodb.activity.util;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,4 +24,9 @@ public class FragmentText extends Fragment {
         return textView;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.e("ShowMerchandise", "执行了关闭数据库的方法");
+    }
 }

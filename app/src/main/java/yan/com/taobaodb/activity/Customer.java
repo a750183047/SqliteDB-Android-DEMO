@@ -11,21 +11,26 @@ import android.util.Log;
 import com.daimajia.swipe.util.Attributes;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 import yan.com.taobaodb.R;
-import yan.com.taobaodb.adapter.RecyclerViewAdapter;
+import yan.com.taobaodb.adapter.AllGoodsAdapter;
 import yan.com.taobaodb.adapter.util.DividerItemDecoration;
+import yan.com.taobaodb.databsse.TBDataBase;
+import yan.com.taobaodb.model.Goods;
 
 /**
- * RecyclerView Activity
+ * 客户活动
  * Created by yan on 2015/10/22.
  */
-public class RecycleView extends AppCompatActivity {
+public class Customer extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerView.Adapter mAdapter;
-    private ArrayList<String> mDataSet;
+    private ArrayList<Goods> mDataSet;
+    private TBDataBase tbDataBase;
+    private List<Goods> goodsList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +45,9 @@ public class RecycleView extends AppCompatActivity {
                 actionBar.setTitle("RecycleView");
             }
         }
+
+        //获取数据库实例
+        tbDataBase = TBDataBase.getInstance(this);
         //Layout 信息
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -48,11 +56,16 @@ public class RecycleView extends AppCompatActivity {
         //recyclerView.setItemAnimator(new FadeInLeftAnimator());   // FadeInLeftAnimator 类没有找到
 
         //Adapter
-        String[] adapterData = new String[]{"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"};
-        mDataSet = new ArrayList<String>(Arrays.asList(adapterData));
-        mAdapter = new RecyclerViewAdapter(this, mDataSet);
-        ((RecyclerViewAdapter) mAdapter).setMode(Attributes.Mode.Single);
+
+        goodsList = tbDataBase.loadAllGoods();
+        mDataSet = new ArrayList<Goods>();
+        for (int i = 0;i<goodsList.size();i++){
+            mDataSet.add(goodsList.get(i));
+        }
+        mAdapter = new AllGoodsAdapter(this, mDataSet);
+        ((AllGoodsAdapter) mAdapter).setMode(Attributes.Mode.Single);
         recyclerView.setAdapter(mAdapter);
+
 
         //设置监听器
         recyclerView.setOnScrollListener(onScrollListener);
