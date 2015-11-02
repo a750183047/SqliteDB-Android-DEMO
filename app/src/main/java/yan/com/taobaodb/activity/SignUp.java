@@ -109,15 +109,20 @@ public class SignUp extends Activity implements TextWatcher{
                             if (!(accountIdInputText.equals(""))){
                                 if (!(accountPasswordInput.getText().toString().equals(""))){
                                     if (accountPasswordInput.getText().toString().equals(chickPasswordInput.getText().toString())){
-                                        Account account = new Account();
-                                        account.setUId(accountIdInputText);
-                                        account.setPassword(accountPasswordInput.getText().toString());
-                                        account.setAccountClass(Account.ACCOUNT_CLASS_CONSUMER);
-                                        tbDataBase.saveAccount(account);
-                                        Toast.makeText(SignUp.this,"账号创建成功",Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(SignUp.this,LogIn.class);
-                                        startActivity(intent);
-                                        finish();
+                                        if (tbDataBase.isAccountOnly(accountIdInputText)){
+                                            Account account = new Account();
+                                            account.setUId(accountIdInputText);
+                                            account.setPassword(accountPasswordInput.getText().toString());
+                                            account.setAccountClass(Account.ACCOUNT_CLASS_CONSUMER);
+                                            tbDataBase.saveAccount(account);
+                                            Toast.makeText(SignUp.this,"账号创建成功",Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(SignUp.this,LogIn.class);
+                                            startActivity(intent);
+                                            finish();
+                                        }else{
+                                            Toast.makeText(SignUp.this,"账号已经被注册，请更换账号",Toast.LENGTH_SHORT).show();
+                                        }
+
                                     }else {
                                         Toast.makeText(SignUp.this,"两次密码不相同，请检查",Toast.LENGTH_SHORT).show();
                                     }
@@ -132,15 +137,20 @@ public class SignUp extends Activity implements TextWatcher{
                            if (!(accountIdInputText.equals(""))){
                                if (!(accountPasswordInput.getText().toString().equals(""))){
                                    if (accountPasswordInput.getText().toString().equals(chickPasswordInput.getText().toString())){
-                                       Account account = new Account();
-                                       account.setUId(accountIdInputText);
-                                       account.setPassword(accountPasswordInput.getText().toString());
-                                       account.setAccountClass(Account.ACCOUNT_CLASS_MERCHANTS);
-                                       tbDataBase.saveAccount(account);
-                                       Toast.makeText(SignUp.this,"账号创建成功",Toast.LENGTH_SHORT).show();
-                                       Intent intent = new Intent(SignUp.this,LogIn.class);
-                                       startActivity(intent);
-                                       finish();
+                                       if (accountPasswordInput.getText().toString().equals(chickPasswordInput.getText().toString())){
+                                           Account account = new Account();
+                                           account.setUId(accountIdInputText);
+                                           account.setPassword(accountPasswordInput.getText().toString());
+                                           account.setAccountClass(Account.ACCOUNT_CLASS_MERCHANTS);
+                                           tbDataBase.saveAccount(account);
+                                           Toast.makeText(SignUp.this,"账号创建成功",Toast.LENGTH_SHORT).show();
+                                           Intent intent = new Intent(SignUp.this,LogIn.class);
+                                           startActivity(intent);
+                                           finish();
+                                       }else {
+                                           Toast.makeText(SignUp.this,"账号已经被注册，请更换账号",Toast.LENGTH_SHORT).show();
+                                       }
+
                                    }else {
                                        Toast.makeText(SignUp.this,"两次密码不相同，请检查",Toast.LENGTH_SHORT).show();
                                    }
@@ -156,15 +166,20 @@ public class SignUp extends Activity implements TextWatcher{
                                if (!(accountPasswordInput.getText().toString().equals(""))){
                                    if (accountPasswordInput.getText().toString().equals(chickPasswordInput.getText().toString())){
                                        if (adminAccountKeyInput.getText().toString().equals(ADMINACCOUNTKEY)){
-                                           Account account = new Account();
-                                           account.setUId(accountIdInputText);
-                                           account.setPassword(accountPasswordInput.getText().toString());
-                                           account.setAccountClass(Account.ACCOUNT_CLASS_ADMIN);
-                                           tbDataBase.saveAccount(account);
-                                           Toast.makeText(SignUp.this,"账号创建成功",Toast.LENGTH_SHORT).show();
-                                           Intent intent = new Intent(SignUp.this,LogIn.class);
-                                           startActivity(intent);
-                                           finish();
+                                           if (accountPasswordInput.getText().toString().equals(chickPasswordInput.getText().toString())){
+                                               Account account = new Account();
+                                               account.setUId(accountIdInputText);
+                                               account.setPassword(accountPasswordInput.getText().toString());
+                                               account.setAccountClass(Account.ACCOUNT_CLASS_ADMIN);
+                                               tbDataBase.saveAccount(account);
+                                               Toast.makeText(SignUp.this,"账号创建成功",Toast.LENGTH_SHORT).show();
+                                               Intent intent = new Intent(SignUp.this,LogIn.class);
+                                               startActivity(intent);
+                                               finish();
+                                           }else {
+                                               Toast.makeText(SignUp.this,"账号已经被注册，请更换账号",Toast.LENGTH_SHORT).show();
+                                           }
+
                                        }else{
                                            Toast.makeText(SignUp.this,"管理员码错误",Toast.LENGTH_SHORT).show();
                                        }

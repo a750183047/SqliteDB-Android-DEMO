@@ -76,7 +76,9 @@ public class LogIn extends Activity implements TextWatcher{
                                 startActivity(intent);
                                 break;
                             case Account.ACCOUNT_CLASS_ADMIN:
-
+                                Intent intentAdmin = new Intent(LogIn.this,Admin.class);
+                                startActivity(intentAdmin);
+                                break;
                             default:
                                 break;
                         }

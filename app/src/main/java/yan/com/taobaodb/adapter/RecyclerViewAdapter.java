@@ -10,12 +10,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.swipe.SimpleSwipeListener;
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.RecyclerSwipeAdapter;
+
 import java.util.ArrayList;
-import com.daimajia.androidanimations.library.YoYo;
 
 import yan.com.taobaodb.R;
 
@@ -94,7 +93,7 @@ public class RecyclerViewAdapter extends RecyclerSwipeAdapter<RecyclerViewAdapte
         simpleViewHolder.swipeLayout.findViewById(R.id.star).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Star", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "赞一个", Toast.LENGTH_SHORT).show();
             }
         });
 

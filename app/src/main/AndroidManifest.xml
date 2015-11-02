@@ -42,6 +42,9 @@
         <activity android:name=".activity.Customer">
 
         </activity>
+        <activity android:name=".activity.Admin">
+
+        </activity>
     </application>
 
 </manifest>

@@ -1,6 +1,5 @@
 package yan.com.taobaodb.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,7 +8,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.Locale;
 
@@ -17,69 +15,51 @@ import it.neokree.materialtabs.MaterialTab;
 import it.neokree.materialtabs.MaterialTabHost;
 import it.neokree.materialtabs.MaterialTabListener;
 import yan.com.taobaodb.R;
-import yan.com.taobaodb.activity.Fragment.AddGoods;
-import yan.com.taobaodb.activity.Fragment.ShowMerchandise;
-import yan.com.taobaodb.activity.Fragment.WatchNotes;
+import yan.com.taobaodb.activity.Fragment.ChangePassword;
+import yan.com.taobaodb.activity.Fragment.ShowAllAccount;
+import yan.com.taobaodb.activity.Fragment.ShowAllMerchants;
 import yan.com.taobaodb.activity.util.FragmentText;
 import yan.com.taobaodb.databsse.TBDataBase;
 import yan.com.taobaodb.model.Merchants;
 
 /**
- * 我的商店活动
- * **/
-
-public class MyShop extends ActionBarActivity implements MaterialTabListener{
-
+ * 管理员活动
+ * Created by yan on 2015/11/1.
+ */
+public class Admin extends ActionBarActivity implements MaterialTabListener{
     MaterialTabHost tabHost;
     ViewPager pager;
     ViewPagerAdapter adapter;
 
     private TBDataBase tbDataBase;
-    private Merchants  merchants;
+    private Merchants merchants;
     private TextView toobarTatel;
-    private AddGoods addGoods; //= new AddGoods();
-    private ShowMerchandise showMerchandise; //= new ShowMerchandise();
-    private WatchNotes watchNotes;// = new WatchNotes();
+    private ShowAllMerchants showAllMerchandise;
+    private ShowAllAccount showAllAccount;
+    private ChangePassword changePassword;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.myshop_layout);
+        setContentView(R.layout.admin_layout);
 
-        addGoods = new AddGoods();
-        showMerchandise = new ShowMerchandise();
-        watchNotes = new WatchNotes();
 
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) this.findViewById(R.id.toolbar);
         toolbar.setTitle("");
         this.setSupportActionBar(toolbar);
         tabHost = (MaterialTabHost) this.findViewById(R.id.tabHost);
-        pager = (ViewPager) this.findViewById(R.id.pager );
+        pager = (ViewPager) this.findViewById(R.id.pager);
         toobarTatel = (TextView) findViewById(R.id.toolbarLabel);
 
-        tbDataBase = TBDataBase.getInstance(this);
-        tbDataBase.openDB(this);
-
-        Intent intent = getIntent();
-        String MerchantsId = intent.getStringExtra("MerchantsId");
-        addGoods.setMerchantsId(MerchantsId);
-        showMerchandise.setMerchantsId(MerchantsId);
-        watchNotes.setMerchantsId(MerchantsId);
-        merchants = tbDataBase.loadAMerchant(MerchantsId);
-        watchNotes.getMerchantsObj(merchants);
-        Log.e("MyShop",merchants.getMId()+"  "+merchants.getMName()+"  "+merchants.getMLevel()+"  "+merchants.getMNote());
-        if (merchants.getMName()!=null){
-            Toast.makeText(MyShop.this,"有数据",Toast.LENGTH_SHORT).show();
-            Log.e("MyShop", merchants.getMName() + "  " + merchants.getMId() + "  " + merchants.getMLevel());
-            toobarTatel.setText(merchants.getMName());
+        //
+        showAllMerchandise = new ShowAllMerchants();
+        showAllAccount = new ShowAllAccount();
+        changePassword = new ChangePassword();
 
 
-        }else {
-            Intent intent1 = new Intent(MyShop.this,CreateMerchants.class);
-            intent1.putExtra("MerchantsId",MerchantsId);
-            startActivity(intent1);
-            Toast.makeText(MyShop.this,"没有数据",Toast.LENGTH_SHORT).show();
-        }
         // init view pager
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         pager.setAdapter(adapter);
@@ -130,14 +110,14 @@ public class MyShop extends ActionBarActivity implements MaterialTabListener{
         public Fragment getItem(int num) {
             switch (num){
                 case 0:
-                    return showMerchandise;
+                    return showAllMerchandise;
                 case 1:
-                    return  addGoods;
+                    return  showAllAccount;
                 case 3:
                     return new FragmentText();
 
                 default:
-                    return  watchNotes;
+                    return  changePassword;
             }
         }
 
@@ -151,11 +131,11 @@ public class MyShop extends ActionBarActivity implements MaterialTabListener{
             Locale l = Locale.getDefault();
             switch (position) {
                 case 0:
-                    return "我的商品".toUpperCase(l);
+                    return "所有商店".toUpperCase(l);
                 case 1:
-                    return "添加商品".toUpperCase(l);
+                    return "所有账号".toUpperCase(l);
                 case 2:
-                    return "查看信息".toUpperCase(l);
+                    return "修改密码".toUpperCase(l);
 
             }
 
@@ -165,13 +145,21 @@ public class MyShop extends ActionBarActivity implements MaterialTabListener{
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-      //  tbDataBase.closeDB();
+    protected void onPause() {
+        super.onPause();
+        Log.e("Admin","onPause");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        finish();
+        Log.e("Admin","onStop");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.e("Admin","onDestroy");
     }
 }

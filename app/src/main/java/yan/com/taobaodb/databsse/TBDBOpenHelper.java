@@ -27,7 +27,7 @@ public class TBDBOpenHelper extends SQLiteOpenHelper {
     public static final String CREATE_MERCHANTS = "create table Merchants ("
             +"MId text primary key,"                                        //商户ID
             +"MName text,"                                                  //商户名
-            +"MLevel text,"                                                  //商户等级
+            +"MLevel integer,"                                                  //商户等级
             +"MNote text"                                                    //备注信息
             +")";
 

@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:id="@+id/toolbarLabel"
-            android:text="我的商店"
+            android:text="管理员"
             android:textColor="@android:color/white"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -45,4 +45,3 @@
         android:layout_height="match_parent"
         />
 </LinearLayout>
-

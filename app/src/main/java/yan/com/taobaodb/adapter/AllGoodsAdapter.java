@@ -79,7 +79,7 @@ public class AllGoodsAdapter extends RecyclerSwipeAdapter<AllGoodsAdapter.Simple
                 simpleViewHolder.goodsPraise.setImageResource(R.drawable.starall);
                 praise = praise +1;
                 tbDataBase.setGpraise(goodsId,praise);
-                Toast.makeText(mContext, "Star", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "赞一个", Toast.LENGTH_SHORT).show();
                 simpleViewHolder.swipeLayout.findViewById(R.id.star).setEnabled(false);
             }
         });
@@ -88,11 +88,6 @@ public class AllGoodsAdapter extends RecyclerSwipeAdapter<AllGoodsAdapter.Simple
         simpleViewHolder.swipeLayout.findViewById(R.id.trash).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //   Toast.makeText(mContext, "Trash Bin", Toast.LENGTH_SHORT).show();mItemManger.removeShownLayouts(simpleViewHolder.swipeLayout);
-                // mDataset.remove(i);
-                // notifyItemRemoved(i);
-                //  mItemManger.closeAllItems();
-                //  Toast.makeText(v.getContext(), "Deleted " + simpleViewHolder.textViewData.getText().toString() + "!", Toast.LENGTH_SHORT).show();
 
                 //创建一个弹窗 警告是否要删除数据
                 AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
@@ -121,7 +116,7 @@ public class AllGoodsAdapter extends RecyclerSwipeAdapter<AllGoodsAdapter.Simple
         simpleViewHolder.swipeLayout.findViewById(R.id.magnifier).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Magnifier", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "商品的卖家", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -129,7 +124,7 @@ public class AllGoodsAdapter extends RecyclerSwipeAdapter<AllGoodsAdapter.Simple
         simpleViewHolder.swipeLayout.getSurfaceView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "Click on surface" + i, Toast.LENGTH_SHORT).show();
+
             }
         });
 

@@ -69,7 +69,7 @@ public class CreateMerchants extends Activity {
             public void onClick(View v) {
                 merchants.setMId(merchantsId);
                 merchants.setMName(merchantsName.getText().toString());
-                merchants.setMLevel("1");
+                merchants.setMLevel(1);
                 merchants.setMNote("无");
                 tbDataBase.saveMerchants(merchants);
                 Intent intent1 = new Intent(CreateMerchants.this,MyShop.class);

@@ -36,7 +36,7 @@ public class WatchNotes extends Fragment {
         merchantsNotes = (TextView) view.findViewById(R.id.my_merchants_notes);
 
         //设置信息
-        merchantsLevel.setText(merchants.getMLevel());
+        merchantsLevel.setText(String.valueOf(merchants.getMLevel()));
         merchantsNotes.setText(merchants.getMNote());
 
         return view;

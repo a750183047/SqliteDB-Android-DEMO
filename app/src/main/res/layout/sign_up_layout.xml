@@ -2,13 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#bebebe">
+    android:background="@drawable/item_selector">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#778899">
+        android:background="#1e90ff">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="#bebebe"/>
+        android:background="@drawable/item_selector"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -146,6 +146,11 @@
                 android:id="@+id/admin_account_key_input"
                 />
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="@drawable/item_selector"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -155,6 +160,8 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:background="#00bfff"
                 android:id="@+id/button_chick_account_sign_up"
                 android:enabled="false"
                 android:gravity="center"
@@ -162,6 +169,7 @@
                 android:textSize="20sp"
                 />
         </LinearLayout>
+
 
     </LinearLayout>
 

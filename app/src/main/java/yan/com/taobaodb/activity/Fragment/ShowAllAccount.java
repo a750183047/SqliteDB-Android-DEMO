@@ -16,22 +16,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import yan.com.taobaodb.R;
-import yan.com.taobaodb.adapter.MyGoodsAdapter;
+import yan.com.taobaodb.adapter.AllAccountAdapter;
 import yan.com.taobaodb.adapter.util.DividerItemDecoration;
 import yan.com.taobaodb.databsse.TBDataBase;
-import yan.com.taobaodb.model.Goods;
+import yan.com.taobaodb.model.Account;
 
 /**
- * 展示商店商品信息
- * Created by yan on 2015/10/22.
+ * 显示所有账号的Fragment
+ * Created by yan on 2015/11/2.
  */
-public class ShowMerchandise extends Fragment {
+public class ShowAllAccount extends Fragment {
+
     private RecyclerView recyclerView;
-    private MyGoodsAdapter mAdapter;
+    private AllAccountAdapter mAdapter;
 
-    private ArrayList<Goods> mDataSet;
+    private ArrayList<Account> mDataSet;
 
-    private List<Goods> goodsList;
+    private List<Account> goodsList;
 
     private TBDataBase tbDataBase;
 
@@ -39,9 +40,9 @@ public class ShowMerchandise extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.myshop_mygoods_layout,container,false);
+        View view = inflater.inflate(R.layout.show_all_account_layout,container,false);
 
-        Log.e("ShowMerchandise","进来了");
+        Log.e("ShowMerchandise", "进来了");
 
         tbDataBase = TBDataBase.getInstance(getActivity());
         tbDataBase.openDB(getActivity());
@@ -55,16 +56,13 @@ public class ShowMerchandise extends Fragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(getResources().getDrawable(R.drawable.divider)));
         //recyclerView.setItemAnimator(new FadeInLeftAnimator());   // FadeInLeftAnimator 类没有找到
 
-        //Adapter
-     //   String[] adapterData = new String[]{"Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", "Wyoming"};
-
-        goodsList = tbDataBase.loadAMerchantsAllGoods(MerchantsId);
-        mDataSet = new ArrayList<Goods>();
+        goodsList = tbDataBase.loadAllAccount();
+        mDataSet = new ArrayList<Account>();
         for (int i = 0;i<goodsList.size();i++){
             mDataSet.add(goodsList.get(i));
         }
-        mAdapter = new MyGoodsAdapter(getActivity(), mDataSet);
-        ((MyGoodsAdapter) mAdapter).setMode(Attributes.Mode.Single);
+        mAdapter = new AllAccountAdapter(getActivity(), mDataSet);
+        ((AllAccountAdapter) mAdapter).setMode(Attributes.Mode.Single);
         recyclerView.setAdapter(mAdapter);
 
         //设置监听器
@@ -88,7 +86,6 @@ public class ShowMerchandise extends Fragment {
         }
     };
 
-
     public void setMerchantsId(String MerchantsId) {
         this.MerchantsId = MerchantsId;
     }
@@ -96,9 +93,8 @@ public class ShowMerchandise extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-       // tbDataBase.closeDB();
+        // tbDataBase.closeDB();
         Log.e("ShowMerchandise","执行了关闭数据库的方法 show");
     }
 }
-
 

@@ -7,7 +7,7 @@ package yan.com.taobaodb.model;
 public class Merchants  {
     private String MId;
     private String MName;
-    private String MLevel;
+    private int MLevel;
     private String MNote;
 
     public void setMId(String MId){
@@ -16,7 +16,7 @@ public class Merchants  {
     public void setMName(String MName){
         this.MName = MName;
     }
-    public void setMLevel(String MLevel){
+    public void setMLevel(int MLevel){
         this.MLevel = MLevel;
     }
     public void setMNote(String MNote){
@@ -28,7 +28,7 @@ public class Merchants  {
     public String getMName(){
         return MName;
     }
-    public String getMLevel(){
+    public int getMLevel(){
         return MLevel;
     }
     public String getMNote(){

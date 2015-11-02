@@ -55,6 +55,30 @@ public class TBDataBase  {
     }
 
     /**
+     * 获取所有账号的列表
+     * **/
+    public List<Account> loadAllAccount(){
+        List<Account> list = new ArrayList<Account>();
+        Cursor cursor = db.query("Account",null,null,null,null,null,null);
+        if (cursor.moveToFirst()){
+            do {
+                Account account = new Account();
+                account.setUId(cursor.getString(cursor.getColumnIndex("UId")));
+                account.setAccountClass(cursor.getInt(cursor.getColumnIndex("Class")));
+                list.add(account);
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        return list;
+    }
+    /**
+     * 删除一个账号信息
+     * */
+    public void deleteAAccount(String UId){
+
+        db.delete("Account", "UId = ?", new String[]{UId});
+    }
+    /**
      * 从数据库中验证账号密码和类型
      * */
     public Account checkPassword(String UId){
@@ -80,8 +104,21 @@ public class TBDataBase  {
     public boolean isAccountOnly(String UId){
         Cursor cursor = db.query("Account",null,"UId = ?",   //查询  where UId = UId
                 new String[]{UId},null,null,null);
-        return (cursor == null);
+        Account account = new Account();
+        if (cursor.moveToFirst()){
+            account.setPassword(cursor.getString(cursor.getColumnIndex("Password")));
+        }
+        cursor.close();
+        return !(account.getPassword() != null && !(account.getPassword().equals("")));
 
+    }
+    /**
+     * 更新密码
+     * */
+    public void updataPassword(String UId,String Password){
+        ContentValues values = new ContentValues();
+        values.put("Password",Password);
+        db.update("Account",values,"UId = ?",new String[]{UId});
     }
     /**
      * 将商户实例储存在数据库中
@@ -107,7 +144,7 @@ public class TBDataBase  {
                 Merchants merchants = new Merchants();
                 merchants.setMId(cursor.getString(cursor.getColumnIndex("MId")));
                 merchants.setMName(cursor.getString(cursor.getColumnIndex("MName")));
-                merchants.setMLevel(cursor.getString(cursor.getColumnIndex("MLevel")));
+                merchants.setMLevel(cursor.getInt(cursor.getColumnIndex("MLevel")));
                 merchants.setMNote(cursor.getString(cursor.getColumnIndex("MNote")));
                 list.add(merchants);
             }while (cursor.moveToNext());
@@ -124,7 +161,7 @@ public class TBDataBase  {
         if (cursor.moveToFirst()){
             merchants.setMId(MId);
             merchants.setMName(cursor.getString(cursor.getColumnIndex("MName")));
-            merchants.setMLevel(cursor.getString(cursor.getColumnIndex("MLevel")));
+            merchants.setMLevel(cursor.getInt(cursor.getColumnIndex("MLevel")));
             merchants.setMNote(cursor.getString(cursor.getColumnIndex("MNote")));
         }
         cursor.close();
@@ -154,6 +191,23 @@ public class TBDataBase  {
         ContentValues values = new ContentValues();
         values.put("GPraise",GPraise);
         db.update("Goods",values,"GId = ?",new String[]{GId});
+    }
+    /**
+     * 更新商店的信息
+     * */
+    public void setMNotes(String MId,String notes){
+        ContentValues values = new ContentValues();
+        values.put("MNote",notes);
+        db.update("Merchants",values,"MId = ?", new String[]{MId});
+    }
+
+    /**
+     * 更新商店等级的信息
+     * */
+    public void setMLevel(String MId,int level){
+        ContentValues values = new ContentValues();
+        values.put("MLevel",level);
+        db.update("Merchants",values,"MId = ?",new String[]{MId});
     }
 
     /**
@@ -203,7 +257,7 @@ public class TBDataBase  {
                     list.add(goods);
                 }while(cursor.moveToNext());
             }
-        }else {
+        } else {
             return null;
         }
         cursor.close();
