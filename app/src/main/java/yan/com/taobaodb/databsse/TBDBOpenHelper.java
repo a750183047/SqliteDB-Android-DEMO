@@ -19,7 +19,7 @@ public class TBDBOpenHelper extends SQLiteOpenHelper {
             +"UId text,"                                                    // 账户ID
             +"Password text,"                                               // 账户密码
             +"Class integer"
-            +")";                                                  //账户类型
+            +")";                                                            //账户类型
 
     /**
      * 商户表创建语句 merchants
@@ -35,7 +35,7 @@ public class TBDBOpenHelper extends SQLiteOpenHelper {
      *商品表创建语句 goods
      **/
     public static final String CREATE_GOODS = "create table Goods ("
-            +"GId integer primary key autoincrement,"                    //商品Id,自增主键
+            +"GId integer primary key autoincrement,"                   //商品Id,自增主键
             +"MId text,"                                                //商品所属商户Id
             +"GName text,"                                              //商品名
             +"GPrice text,"                                             //商品价格

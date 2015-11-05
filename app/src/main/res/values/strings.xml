@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TaoBaoDB</string>
+    <string name="app_name">电商后台管理系统</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
