@@ -28,12 +28,6 @@
     </option>
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
-    <OptionsSetting value="true" id="添加" />
-    <OptionsSetting value="true" id="移除" />
-    <OptionsSetting value="true" id="签出" />
-    <OptionsSetting value="true" id="更新" />
-    <OptionsSetting value="true" id="状态" />
-    <OptionsSetting value="true" id="编辑" />
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
